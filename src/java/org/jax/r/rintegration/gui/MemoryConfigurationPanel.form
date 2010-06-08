@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.6" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="2"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="javaMemoryLimitLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="rMemoryLimitLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="rMemoryLimitSpinner" min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="rMegabytesLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="javaMemoryLimitSpinner" min="-2" pref="82" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="javaMegabytesLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="javaMemoryLimitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="javaMemoryLimitSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="javaMegabytesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="rMemoryLimitLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rMemoryLimitSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rMegabytesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="javaMemoryLimitLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Java Memory Limit:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="javaMemoryLimitSpinner">
+    </Component>
+    <Component class="javax.swing.JLabel" name="javaMegabytesLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Megabytes"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="rMemoryLimitLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="R Memory Limit (Windows Only)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="rMemoryLimitSpinner">
+    </Component>
+    <Component class="javax.swing.JLabel" name="rMegabytesLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Megabytes"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
