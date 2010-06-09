@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ivy-module version="2.0">
-    <info organisation="org.jax" module="r-interface" revision="1.0"/>
+    <info organisation="org.jax" module="rjava-interface" revision="1.0"/>
     
     <configurations>
         <conf
@@ -14,7 +14,7 @@
     </configurations>
 
     <publications>
-        <artifact name="r-interface" type="jar" ext="jar"/>
+        <artifact name="rjava-interface" type="jar" ext="jar"/>
     </publications>
     
     <dependencies>
@@ -24,11 +24,11 @@
             rev="latest.integration"/>
         <dependency
             org="org.jax"
-            name="jax-util"
+            name="java-util"
             rev="latest.integration"/>
         <dependency
             org="org.jax"
-            name="jax-schema"
+            name="rjava-conf-schema"
             rev="latest.integration"/>
         <dependency
             org="org.jax"
