@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/swing-layout-1.0.3.jar"/>
-	<classpathentry kind="lib" path="lib/JRI-0.8-1.jar"/>
 	<classpathentry kind="lib" path="lib/jaxb-api-2.1.6.jar"/>
 	<classpathentry kind="lib" path="lib/jsr173_1.0_api-2.1.6.jar"/>
+	<classpathentry kind="lib" path="lib/JRI-0.8-8.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jax-util"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/managed-jvm-launcher"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jax-schema"/>
