@@ -46,11 +46,6 @@ public class WindowsSpecificRFunctions extends AbstractPlatformSpecificRFunction
     private static final String DEFAULT_INSTALL_ROOT = "C:\\Program Files\\R";
 
     /**
-     * the default path to the R dynamically loadable library relative to the R_HOME
-     */
-    private static final String DEFAULT_R_LIBRARY_RELATIVE_PATH = "bin";
-
-    /**
      * the env variable windows uses to look up DLL's
      */
     private static final String LD_LIB_PATH_ENV_VAR_NAME = "PATH";
@@ -68,7 +63,7 @@ public class WindowsSpecificRFunctions extends AbstractPlatformSpecificRFunction
      */
     public File rHomeToExpectedRLibrary(File home)
     {
-        return new File(home, DEFAULT_R_LIBRARY_RELATIVE_PATH);
+        return new File(new File(home, "bin"), "i386");
     }
 
     /**
