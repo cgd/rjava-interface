@@ -53,9 +53,21 @@ public class WindowsSpecificRFunctions extends AbstractPlatformSpecificRFunction
     /**
      * {@inheritDoc}
      */
-    public File getExpectedInstallRoot()
+    public File[] getExpectedInstallRoots()
     {
-        return new File(DEFAULT_INSTALL_ROOT);
+        String userHome = System.getProperty("user.home");
+        if(userHome == null) {
+            return new File[] {new File(DEFAULT_INSTALL_ROOT)};
+        } else {
+            File homeFile1 = new File(userHome, "R");
+            File homeFile2 = new File(userHome, "Documents");
+            homeFile2 = new File(homeFile2, "R");
+            return new File[] {
+                new File(DEFAULT_INSTALL_ROOT),
+                homeFile1,
+                homeFile2
+            };
+        }
     }
 
     /**

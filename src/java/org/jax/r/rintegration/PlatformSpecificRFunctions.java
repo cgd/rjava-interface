@@ -36,7 +36,7 @@ public interface PlatformSpecificRFunctions
      * @return
      *          the location where we expect R to be installed
      */
-    public File getExpectedInstallRoot();
+    public File[] getExpectedInstallRoots();
 
     /**
      * Given an R_HOME directory, this function returns the directory

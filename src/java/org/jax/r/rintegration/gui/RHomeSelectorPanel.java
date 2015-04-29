@@ -40,8 +40,8 @@ import org.jax.r.rintegration.PlatformSpecificRFunctions;
 import org.jax.r.rintegration.RInstallation;
 import org.jax.r.rintegration.RInstallationScanner;
 import org.jax.r.rintegration.RLaunchConfiguration;
-import org.jax.r.rintegration.VersionStringComparator;
 import org.jax.r.rintegration.RLaunchConfiguration.LaunchUsingEnum;
+import org.jax.r.rintegration.VersionStringComparator;
 import org.jax.util.TextWrapper;
 import org.jax.util.concurrent.SettableFuture;
 
@@ -883,13 +883,21 @@ public class RHomeSelectorPanel extends javax.swing.JPanel
            this.warnAboutNoRInstallations)
         {
             // warn the user that we cant find any R installations
-            final String message = "Could not find any R installations in the default "
-                    + "installation directory: "
-                    + this.rPlatformSpecific.getExpectedInstallRoot()
-                    + " . If you know the location of an existing installation "
-                    + "you can use the browse button to locate it. Otherwise, "
-                    + "you should cancel and restart the application after "
-                    + "installing R.";
+            final StringBuilder message = new StringBuilder();
+            message.append("Could not find any R installations in the default ");
+            message.append("installation directory(s): ");
+            File[] expectedInstallRoots = this.rPlatformSpecific.getExpectedInstallRoots();
+            for(int i = 0; i < expectedInstallRoots.length; i++) {
+                if(i >= 1) {
+                    message.append(", ");
+                }
+                message.append(expectedInstallRoots[i]);
+            }
+            message.append(". If you know the location of an existing installation ");
+            message.append("you can use the browse button to locate it. Otherwise, ");
+            message.append("you should cancel and restart the application after ");
+            message.append("installing R.");
+            
             SwingUtilities.invokeLater(new Runnable()
             {
                 public void run()
@@ -897,7 +905,7 @@ public class RHomeSelectorPanel extends javax.swing.JPanel
                     JOptionPane.showMessageDialog(
                             RHomeSelectorPanel.this,
                             TextWrapper.wrapText(
-                                    message,
+                                    message.toString(),
                                     TextWrapper.DEFAULT_DIALOG_COLUMN_COUNT),
                             "No R Installations Detected",
                             JOptionPane.WARNING_MESSAGE);

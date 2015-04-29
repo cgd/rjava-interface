@@ -64,9 +64,9 @@ public class MacSpecificRFunctions extends AbstractPlatformSpecificRFunctions
     /**
      * {@inheritDoc}
      */
-    public File getExpectedInstallRoot()
+    public File[] getExpectedInstallRoots()
     {
-        return new File(DEFAULT_INSTALL_ROOT);
+        return new File[] {new File(DEFAULT_INSTALL_ROOT)};
     }
 
     /**

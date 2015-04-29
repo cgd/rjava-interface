@@ -171,92 +171,93 @@ public class RInstallationScanner
             String minimumVersionString)
     {
         List<RInstallation> discoveredRInstallations = new ArrayList<RInstallation>();
-        File defaultInstallRootDir = rInstallDirStructure.getExpectedInstallRoot();
         
-        if(!defaultInstallRootDir.exists())
-        {
-            LOG.info(
-                    "default R install dir \"" +
-                    rInstallDirStructure.getExpectedInstallRoot() +
-                    "\" doesn't exist");
-        }
-        else if(!defaultInstallRootDir.isDirectory())
-        {
-            LOG.info(
-                    "default R install dir \"" +
-                    rInstallDirStructure.getExpectedInstallRoot() +
-                    "\" exists but is not a directory");
-        }
-        else
-        {
-            // we're ready to dive into the install root
-            File[] versionRootsArray = defaultInstallRootDir.listFiles();
-            
-            if(versionRootsArray == null || versionRootsArray.length == 0)
+        for(File defaultInstallRootDir : rInstallDirStructure.getExpectedInstallRoots()) {
+            if(!defaultInstallRootDir.exists())
             {
                 LOG.info(
-                        "didn't find any R versions in the default R install directory \"" +
-                        rInstallDirStructure.getExpectedInstallRoot() + "\"");
+                        "default R install dir \"" +
+                        defaultInstallRootDir +
+                        "\" doesn't exist");
+            }
+            else if(!defaultInstallRootDir.isDirectory())
+            {
+                LOG.info(
+                        "default R install dir \"" +
+                        defaultInstallRootDir +
+                        "\" exists but is not a directory");
             }
             else
             {
-                Map<File, File> canonicalToAbsoluteVersionRootMap = new HashMap<File, File>();
-                for(File versionRoot: versionRootsArray)
+                // we're ready to dive into the install root
+                File[] versionRootsArray = defaultInstallRootDir.listFiles();
+                
+                if(versionRootsArray == null || versionRootsArray.length == 0)
                 {
-                    try
+                    LOG.info(
+                            "didn't find any R versions in the default R install directory \"" +
+                            defaultInstallRootDir + "\"");
+                }
+                else
+                {
+                    Map<File, File> canonicalToAbsoluteVersionRootMap = new HashMap<File, File>();
+                    for(File versionRoot: versionRootsArray)
                     {
-                        File canonicalPath = versionRoot.getCanonicalFile();
-                        File absolutePath = versionRoot.getAbsoluteFile();
-                        
-                        if(!canonicalToAbsoluteVersionRootMap.containsKey(canonicalPath) ||
-                           absolutePath.equals(canonicalPath))
+                        try
                         {
+                            File canonicalPath = versionRoot.getCanonicalFile();
+                            File absolutePath = versionRoot.getAbsoluteFile();
+                            
+                            if(!canonicalToAbsoluteVersionRootMap.containsKey(canonicalPath) ||
+                               absolutePath.equals(canonicalPath))
+                            {
+                                canonicalToAbsoluteVersionRootMap.put(
+                                        canonicalPath,
+                                        absolutePath);
+                            }
+                        }
+                        catch(IOException ex)
+                        {
+                            // Fall back on the absolute path
+                            File absolutePath = versionRoot.getAbsoluteFile();
                             canonicalToAbsoluteVersionRootMap.put(
-                                    canonicalPath,
+                                    absolutePath,
                                     absolutePath);
                         }
                     }
-                    catch(IOException ex)
-                    {
-                        // Fall back on the absolute path
-                        File absolutePath = versionRoot.getAbsoluteFile();
-                        canonicalToAbsoluteVersionRootMap.put(
-                                absolutePath,
-                                absolutePath);
-                    }
-                }
-                List<File> versionRoots = new ArrayList<File>(
-                        canonicalToAbsoluteVersionRootMap.values());
-                Collections.sort(versionRoots);
-                
-                for(File currVersionRoot: versionRoots)
-                {
-                    // check for the R_HOME
-                    File currRHomeDirectory =
-                        rInstallDirStructure.versionRootToExpectedRHome(
-                                currVersionRoot);
-                    RInstallation currRInstallation =
-                        this.rHomeDirectoryToRInstallation(
-                                rInstallDirStructure,
-                                currRHomeDirectory);
+                    List<File> versionRoots = new ArrayList<File>(
+                            canonicalToAbsoluteVersionRootMap.values());
+                    Collections.sort(versionRoots);
                     
-                    if(currRInstallation != null)
+                    for(File currVersionRoot: versionRoots)
                     {
-                        if(minimumVersionString == null)
+                        // check for the R_HOME
+                        File currRHomeDirectory =
+                            rInstallDirStructure.versionRootToExpectedRHome(
+                                    currVersionRoot);
+                        RInstallation currRInstallation =
+                            this.rHomeDirectoryToRInstallation(
+                                    rInstallDirStructure,
+                                    currRHomeDirectory);
+                        
+                        if(currRInstallation != null)
                         {
-                            // if the minimum version string is null, then we
-                            // don't need to go through any more checks. just
-                            // pass the R Home through
-                            discoveredRInstallations.add(currRInstallation);
-                        }
-                        else if(currRInstallation.getRVersion() != null &&
-                                VersionStringComparator.getInstance().compare(
-                                        currRInstallation.getRVersion(),
-                                        minimumVersionString) >= 0)
-                        {
-                            // the versioning test passed, we can put this
-                            // R Home through
-                            discoveredRInstallations.add(currRInstallation);
+                            if(minimumVersionString == null)
+                            {
+                                // if the minimum version string is null, then we
+                                // don't need to go through any more checks. just
+                                // pass the R Home through
+                                discoveredRInstallations.add(currRInstallation);
+                            }
+                            else if(currRInstallation.getRVersion() != null &&
+                                    VersionStringComparator.getInstance().compare(
+                                            currRInstallation.getRVersion(),
+                                            minimumVersionString) >= 0)
+                            {
+                                // the versioning test passed, we can put this
+                                // R Home through
+                                discoveredRInstallations.add(currRInstallation);
+                            }
                         }
                     }
                 }
